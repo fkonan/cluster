@@ -1,0 +1,97 @@
+{
+  "Guest" : {
+    "denied" : {},
+    "Home" : ["index"],
+    "Users" : ["login","nuevo","guardarEmpresa","guardarUsuario","validarDuplicado","logout"],
+    "Empresas":["validarDuplicado"],
+    "Restricted" : ["*"]
+  },
+  "LoggedIn" : {
+    "Home":["*"],
+    "denied" : {
+      "Users" : ["login"]
+    },
+    "Users" : ["logout"]
+  },
+
+  "INVITADO":{
+    "denied":{},
+    "Home":["*"]
+  },
+
+  "ADMINISTRADOR":{
+    "denied":{},
+    "Home":["*"],
+    "Roles":["*"],
+    "Permisos":["*"],
+    "TipoEmpresa":["*"],
+    "Adjuntos":["*"],
+    "Empresas":["*"],
+    "Sectores":["*"],
+    "Ofertas":["*"],
+    "Demandas":["*"],
+    "TipoProducto":["*"],
+    "Permisos":["*"],
+    "Productos":["*"],
+    "OfertaAcademica":["*"],
+    "Municipio":["*"],
+    "TipoObra":["*"],
+    "TipoOfertaAcademica":["*"],
+    "SubTipoObra":["*"],
+    "DatosObra":["*"],
+    "MaterialCategoria":["*"],
+    "MaterialTipo":["*"],
+    "MaterialSubTipo":["*"],
+    "ResiduoClase":["*"],
+    "ResiduoCategoria":["*"],
+    "ResiduoTipo":["*"],
+    "ResiduoSubTipo":["*"],
+    "Ideam":["*"],
+    "Users":["*"]
+  },
+  
+  "PARAMETROS":{
+    "denied":{},
+    "Home":["*"]
+  },
+  "CLASIFICACION_CLIMATICA":{
+    "denied":{},
+    "Home":["*"]
+  },
+  "PROYECTOS":{
+    "denied":{},
+    "Home":["*"]
+  },
+  "ARQUITECTURA":{
+    "denied":{},
+    "Home":["*"]
+  },
+  "ENERGIA":{
+    "denied":{},
+    "Home":["*"]
+  },
+  "AGUA":{
+    "denied":{},
+    "Home":["*"]
+  },
+  "MATERIALES":{
+    "denied":{},
+    "Home":["*"]
+  },
+  "PROVEEDORES":{
+    "denied":{},
+    "Home":["*"]
+  },
+  "OFERTA_DEMANDA":{
+    "denied":{},
+    "Home":["*"]
+  },
+  "OFERTA_ACADEMICA":{
+    "denied":{},
+    "Home":["*"]
+  },
+  "REPORTES_GENERALES":{
+    "denied":{},
+    "Home":["*"]
+  }
+}

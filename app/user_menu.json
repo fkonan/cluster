@@ -1,0 +1,14 @@
+{
+	"Parametrización":{
+
+		"Productos": "producto"
+	},
+
+	"Clientes":"clientes",
+	"Facturas":"factura",
+	
+	"Iniciar sesión" : "users/login",
+	"%USERNAME%" : {
+    	"Cerrar sesión" : "users/logout"
+	}
+}

@@ -1,0 +1,59 @@
+.nav.metismenu > li > a {
+   font-weight: 700!important;
+   padding-left:18px!important;
+   padding-top:5px;
+}
+
+.fa-6x {
+   font-size: 6em;
+}
+
+td.details-control {
+   background: url('../img/details_open.png') no-repeat center center;
+   cursor: pointer;
+}
+tr.shown td.details-control {
+   background: url('../img/details_close.png') no-repeat center center;
+}
+
+.navbar-static-side {
+   z-index: 2001;
+   width: 250px;
+}
+
+.agua-bg,
+.bg-agua {
+   background-color: #2CC1EF !important;
+   color: #ffffff;
+}
+
+.slider {
+   width: 100%;
+}
+
+.slick-slide img {
+   height: 36em;
+}
+
+.custom-file-label::after{
+   content:"Buscar";
+}
+
+.modal-backdrop {
+   z-index: 10999 !important;
+}
+
+.modal{
+   z-index: 11000 !important;
+}
+.my-zswal{
+   z-index: 12000 !important;
+}
+
+.swal-container {
+   z-index: 12000 !important;
+}
+
+.swal2-container {
+  z-index: 12000 !important;
+}
