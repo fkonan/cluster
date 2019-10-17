@@ -20,6 +20,12 @@ function validarDuplicidad(controlador,metodo,nombre_campo,valor){
     });
 }
 
-function mostrarContenidoEnMedio($msg){
-   $('#page-wrapper').html($msg);
+function mostrarContenidoEnMedio(msg){
+	//alert('Mostrando Contenido');
+	$('#page-wrapper').removeClass("gray-bg");
+	$('#page-wrapper').attr("css", { backgroundColor: "white !important;" });
+	$('#page-wrapper').html(msg+'</div><div class="footer text-white" style="background-color: #293846 !important;"><strong>Copyright</strong> CLUSTER DE CONSTRUCCIÓN DE SANTANDER. &copy; <?= date("Y");?>');
+	//$('#contenido').html(msg);
 }
+
+

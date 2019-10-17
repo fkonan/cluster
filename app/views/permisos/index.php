@@ -102,7 +102,7 @@ use Core\H;
 	}
 	
 	function mostrarPermisosRol(id){
-		
+				
 		if($("#cmb_rol").val()!= ''){
 		  
 			jQuery.ajax({

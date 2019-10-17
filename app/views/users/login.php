@@ -91,7 +91,7 @@ use Core\FH;
             data : formData,
             success: function(resp){
                if(resp.success){
-                  alertMsg('Proceso exitoso!','El registro fue creado correctamente el administrador procedera a revisar la información y le avisará por correo electrónico cuando su usuario se encuentre activo', 'success',2000);
+                  alertMsg('Proceso exitoso!','Bienvenido al sistema.', 'success',2000);
                   if(resp.estado)
                     setTimeout(function () {
                       window.location.href = '<?=PROOT?>home'; //will redirect to your blog page (an ex: blog.html)
