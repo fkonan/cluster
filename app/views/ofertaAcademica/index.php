@@ -129,7 +129,6 @@
 
 	// Muestra modal para agregar y para modificar un TOA0
 	function showModalAgregarModificarOA(idOA){
-	  //alert('Agregando nuevo');
 	   // Envia al controlador roles
 	  jQuery.ajax({
 		 url : '<?=PROOT?>ofertaAcademica/nuevo',
@@ -211,6 +210,8 @@
 	
 	function modificarOA(){
 				
+		//alert('attr: ' + $('#adjuntoOA').attr('value') + 'ValAdjunto: ' + $('#adjuntoOA').val());
+
 		if ($('#txt_nombreOA').val() == '') {
 			alertMsg('Información Incompleta!','Debe digitar un nombre para la oferta.', 'warning',2000);
 			$('#txt_nombreOA').focus();
@@ -230,10 +231,6 @@
 		}else if ($('#txt_descripcion').val() == '') {
 			alertMsg('Información Incompleta!','Debe especificar una descripción.', 'warning',2000);
 			$('#txt_descripcion').focus();
-		   	return false;
-		}else if ($('#adjuntoOA').val() == '') {
-			alertMsg('Información Incompleta!','Debe adjuntar un catalogo para la oferta académica.', 'warning',2000);
-			$('#adjuntoOA').focus();
 		   	return false;
 		}else{
 		

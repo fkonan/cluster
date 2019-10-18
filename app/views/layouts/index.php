@@ -25,6 +25,28 @@ use App\Controllers\RolesController;
    <link href="<?=PROOT?>css/style.css" rel="stylesheet">
    <link href="<?=PROOT?>css/custom.css" rel="stylesheet">
    <?= $this->content('head'); ?>
+	<script>
+	
+	
+	function showModalAgregarBuscadorURL(idOA=1){
+	// Envia al controlador roles
+		jQuery.ajax({
+		url : '<?=PROOT?>ofertaAcademica/nuevo',
+		method : "POST",
+		data: {
+		idOA:idOA 
+		},
+		success : function(resp){
+				//console.log(resp);
+				jQuery('#modalTitulo').html('Busqueda en diccionario de navegación.');
+				jQuery('#bodyModal').html('<h3 align="center"> Listando resultados...</h3>');
+				jQuery('#frmModal').modal({backdrop: 'static', keyboard: false});
+				jQuery('#frmModal').modal('show');
+			}
+			
+		});
+	}
+	</script>
    
 </head>
 <body class="fixed-nav md-skin">
@@ -104,7 +126,7 @@ use App\Controllers\RolesController;
             <ul class="nav metismenu" id="side-menu">
                <!--ADMINISTRADOR-->
                <li class="border-bottom" style="<?php echo $administracionAccess; ?>">
-                  <a href="#" onClick="mostrarContenidoEnMedio(`<img class='img img-fluid' src='<?=PROOT?>img/menu/presentacion/administracion.png'>`)">
+                  <a href="#" onClick="mostrarContenidoEnMedio(`<p align='center'><img class='img' src='<?=PROOT?>img/menu/presentacion/administracion.png'></p>`)">
                      <span class="fa arrow pt-1"></span>
                      <img src="<?=PROOT?>img/menu/administrador.png" alt="" width="30px" height="30px"> 
                      <span class="nav-label text-primary">&nbsp; Administrador</span>
@@ -180,14 +202,16 @@ use App\Controllers\RolesController;
                </li>
                <!--PARAMETROS-->
                <li class="border-bottom" style="<?php echo $parametrosAccess; ?>">
-                  <a href="#" onClick="mostrarContenidoEnMedio(`<img class='img img-fluid' src='<?=PROOT?>img/menu/presentacion/parametros.png'>`)">
-                                       <span class="fa arrow pt-1"></span>
+				  <!-- <a href="<?=PROOT?>embended/parametros">-->
+				  
+				  <a href="#" onClick="mostrarContenidoEnMedio(`<p align='center'><img class='img' src='<?=PROOT?>img/menu/presentacion/parametros.png'></p>`)">
+                     <span class="fa arrow pt-1"></span>
                      <img src="<?=PROOT?>img/menu/parametros.png" alt="" width="30px" height="30px"> 
                      <span class="nav-label text-primary">Parametros</span>
                   </a>
                   <ul class="nav nav-second-level collapse">
                      <li>
-                        <a href="#" id="sistema">
+						<a href="#">
                            <span class="fa arrow pr-3"></span>
                            Generales
                         </a>
@@ -331,7 +355,7 @@ use App\Controllers\RolesController;
                </li>
                <!--CLASIFICACION CLIMATICA-->
                <li class="border-bottom" style="<?php echo ${'ClasificaciónClimática'}; ?>">
-                  <a href="#" onClick="mostrarContenidoEnMedio(`<img class='img img-fluid' src='<?=PROOT?>img/menu/presentacion/clasificacion_climatica.png'>`)">
+                  <a href="#" onClick="mostrarContenidoEnMedio(`<p align='center'><img class='img' src='<?=PROOT?>img/menu/presentacion/clasificacion_climatica.png'></p>`)">
                      <span class="fa arrow pt-1"></span>
                      <img src="<?=PROOT?>img/menu/sistema.png" alt="" width="30px" height="30px"> 
                      <span class="nav-label text-primary">&nbsp;Clasificación climática</span>
@@ -345,82 +369,39 @@ use App\Controllers\RolesController;
                         </a>
                      </li>
                      <li>
-                        <a href="#" id="sistema">
+                        <a href="<?=PROOT?>embended">
                            <span class="fa arrow pr-3"></span>
-                           Bucaramaga
+                           Area Metropolitana de Bucaramanga
                         </a>
-                        <ul class="nav nav-third-level">
-                           <li>
-                              <a href="#"> <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                 Descripción del clima
-                              </a>
-                           </li>
-                           <li>
-                              <a href="#"> <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                 Clasificación climatica IDEAM
-                              </a>
-                           </li>
-                        </ul>
                      </li>
+
                      <li>
                         <a href="#" id="sistema">
                            <span class="fa arrow pr-3"></span>
-                           Florida
+                           Descargas
                         </a>
                         <ul class="nav nav-third-level">
                            <li>
-                              <a href="#"> <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                 Descripción del clima
+                              <a href="<?=PROOT?>/documentos/Archivo_Climatico_AMB.zip"> <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                 Archivo Climatico
                               </a>
                            </li>
                            <li>
-                              <a href="#"> <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                 Clasificación climatica IDEAM
+                              <a href="<?=PROOT?>embended/climateConsultant" target="_parent"> 
+								  <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                 Climate Consultant (.zip)
                               </a>
                            </li>
                         </ul>
                      </li>
-                     <li>
-                        <a href="#" id="sistema">
-                           <span class="fa arrow pr-3"></span>
-                           Piedecuesta
-                        </a>
-                        <ul class="nav nav-third-level">
-                           <li>
-                              <a href="#"> <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                 Descripción del clima
-                              </a>
-                           </li>
-                           <li>
-                              <a href="#"> <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                 Clasificación climatica IDEAM
-                              </a>
-                           </li>
-                        </ul>
-                     </li>
-                     <li>
-                        <a href="#" id="sistema">
-                           <span class="fa arrow pr-3"></span>
-                           Girón
-                        </a>
-                        <ul class="nav nav-third-level">
-                           <li>
-                              <a href="#"> <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                 Descripción del clima
-                              </a>
-                           </li>
-                           <li>
-                              <a href="#" > <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                 Clasificación climatica IDEAM
-                              </a>
-                           </li>
-                        </ul>
-                     </li>
+					  
+					  
+					  
                   </ul>
                </li>
                <!--PROYECTOS-->
                <li class="border-bottom" style="<?php echo ${'Proyectos'}; ?>">
-                  <a href="#" onClick="mostrarContenidoEnMedio(`<img class='img img-fluid' src='<?=PROOT?>img/menu/presentacion/proyectos.png'>`)">
+                  <a href="#" onClick="mostrarContenidoEnMedio(`<p align='center'><img class='img' src='<?=PROOT?>img/menu/presentacion/proyectos.png'></p>`)">
                      <span class="fa arrow pt-1"></span>
                      <img src="<?=PROOT?>img/menu/proyectos.png" alt="" width="30px" height="30px"> 
                      <span class="nav-label text-primary">&nbsp; Proyectos</span>
@@ -444,7 +425,7 @@ use App\Controllers\RolesController;
                </li>
                <!--ARQUITECTURA-->
                <li class="border-bottom" style="<?php echo ${'Arquitectura'}; ?>">
-                  <a href="#" onClick="mostrarContenidoEnMedio(`<img class='img img-fluid' src='<?=PROOT?>img/menu/presentacion/arquitectura.png'>`)">
+                  <a href="#" onClick="mostrarContenidoEnMedio(`<p align='center'><img class='img' src='<?=PROOT?>img/menu/presentacion/arquitectura.png'></p>`)">
                      <span class="fa arrow pt-1"></span>
                      <img src="<?=PROOT?>img/menu/confort.png" alt="" width="30px" height="30px"> 
                      <span class="nav-label text-primary">Arquitectura</span>
@@ -501,134 +482,34 @@ use App\Controllers\RolesController;
                         </a>
                         <ul class="nav nav-third-level">
                            <li>
-                              <a href="#">
+                              <a href="<?=PROOT?>arquitectura/vis">
                                  <i class="fa fa-angle-right" aria-hidden="true"></i>
                                  VIS
                               </a>
-                              <ul class="nav nav-third-level">
-                                 <li>
-                                    <a href="#" class="ml-3 pr-3">
-                                       Ficha
-                                       <span class="fa arrow pt-1"></span>
-                                    </a>
-                                 </li>
-                                 <li>
-                                    <a href="#" class="ml-3 pr-3">
-                                       Excel
-                                       <span class="fa arrow pt-1"></span>
-                                    </a>
-                                 </li>
-                                 <li>
-                                    <a href="#" class="ml-3 pr-3">
-                                       Dwg
-                                       <span class="fa arrow pt-1"></span>
-                                    </a>
-                                 </li>
-                              </ul>
                            </li>
                            <li>
-                              <a href="#">
+                              <a href="<?=PROOT?>arquitectura/tyc">
                                  <i class="fa fa-angle-right" aria-hidden="true"></i>
                                  E3Y4
                               </a>
-                              <ul class="nav nav-third-level">
-                                 <li>
-                                    <a href="#" class="ml-3 pr-3">
-                                       Ficha
-                                       <span class="fa arrow pt-1"></span>
-                                    </a>
-                                 </li>
-                                 <li>
-                                    <a href="#" class="ml-3 pr-3">
-                                       Excel
-                                       <span class="fa arrow pt-1"></span>
-                                    </a>
-                                 </li>
-                                 <li>
-                                    <a href="#" class="ml-3 pr-3">
-                                       Dwg
-                                       <span class="fa arrow pt-1"></span>
-                                    </a>
-                                 </li>
-                              </ul>
                            </li>
                            <li>
-                              <a href="#">
+                              <a href="<?=PROOT?>arquitectura/cys">
                                  <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                 E3Y6
+                                 E5Y6
                               </a>
-                              <ul class="nav nav-third-level">
-                                 <li>
-                                    <a href="#" class="ml-3 pr-3">
-                                       Ficha
-                                       <span class="fa arrow pt-1"></span>
-                                    </a>
-                                 </li>
-                                 <li>
-                                    <a href="#" class="ml-3 pr-3">
-                                       Excel
-                                       <span class="fa arrow pt-1"></span>
-                                    </a>
-                                 </li>
-                                 <li>
-                                    <a href="#" class="ml-3 pr-3">
-                                       Dwg
-                                       <span class="fa arrow pt-1"></span>
-                                    </a>
-                                 </li>
-                              </ul>
                            </li>
                            <li>
-                              <a href="#">
+                              <a href="<?=PROOT?>arquitectura/op">
                                  <i class="fa fa-angle-right" aria-hidden="true"></i>
                                  Oficinas pequeñas
                               </a>
-                              <ul class="nav nav-third-level">
-                                 <li>
-                                    <a href="#" class="ml-3 pr-3">
-                                       Ficha
-                                       <span class="fa arrow pt-1"></span>
-                                    </a>
-                                 </li>
-                                 <li>
-                                    <a href="#" class="ml-3 pr-3">
-                                       Excel
-                                       <span class="fa arrow pt-1"></span>
-                                    </a>
-                                 </li>
-                                 <li>
-                                    <a href="#" class="ml-3 pr-3">
-                                       Dwg
-                                       <span class="fa arrow pt-1"></span>
-                                    </a>
-                                 </li>
-                              </ul>
                            </li>
                            <li>
-                              <a href="#">
+                              <a href="<?=PROOT?>arquitectura/og">
                                  <i class="fa fa-angle-right" aria-hidden="true"></i>
                                  Oficinas grandes
                               </a>
-                              <ul class="nav nav-third-level">
-                                 <li>
-                                    <a href="#" class="ml-3 pr-3">
-                                       Ficha
-                                       <span class="fa arrow pt-1"></span>
-                                    </a>
-                                 </li>
-                                 <li>
-                                    <a href="#" class="ml-3 pr-3">
-                                       Excel
-                                       <span class="fa arrow pt-1"></span>
-                                    </a>
-                                 </li>
-                                 <li>
-                                    <a href="#" class="ml-3 pr-3">
-                                       Dwg
-                                       <span class="fa arrow pt-1"></span>
-                                    </a>
-                                 </li>
-                              </ul>
                            </li>
                         </ul>
                      </li>
@@ -694,7 +575,7 @@ use App\Controllers\RolesController;
                </li>
                <!--ENERGIA-->
                <li class="border-bottom" style="<?php echo ${'Energía'}; ?>">
-                  <a href="#" onClick="mostrarContenidoEnMedio(`<img class='img img-fluid' src='<?=PROOT?>img/menu/presentacion/energia.png'>`)">
+                  <a href="#" onClick="mostrarContenidoEnMedio(`<p align='center'><img class='img' src='<?=PROOT?>img/menu/presentacion/energia.png'></p>`)">
                   <span class="fa arrow pt-1"></span>
                      <img src="<?=PROOT?>img/menu/energia.png" alt="" width="30px" height="30px"> 
                      <span class="nav-label text-primary">Energía</span>
@@ -745,31 +626,31 @@ use App\Controllers\RolesController;
                         </a>
                         <ul class="nav nav-third-level">
                            <li>
-                              <a href="#">
+                              <a href="<?=PROOT?>energia/vis">
                                  <i class="fa fa-angle-right" aria-hidden="true"></i>
                                  VIS
                               </a>
                            </li>
                            <li>
-                              <a href="#">
+                              <a href="<?=PROOT?>energia/tyc">
                                  <i class="fa fa-angle-right" aria-hidden="true"></i>
                                  E3Y4
                               </a>
                            </li>
                            <li>
-                              <a href="#">
+                              <a href="<?=PROOT?>energia/cys">
                                  <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                 E3Y6
+                                 E5Y6
                               </a>
                            </li>
                            <li>
-                              <a href="#">
+                              <a href="<?=PROOT?>energia/op">
                                  <i class="fa fa-angle-right" aria-hidden="true"></i>
                                  Oficinas pequeñas
                               </a>
                            </li>
                            <li>
-                              <a href="#">
+                              <a href="<?=PROOT?>energia/og">
                                  <i class="fa fa-angle-right" aria-hidden="true"></i>
                                  Oficinas grandes
                               </a>
@@ -797,11 +678,11 @@ use App\Controllers\RolesController;
                            <li>
                               <a href="#">
                                  <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                 E3Y6
+                                 E5Y6
                               </a>
                            </li>
                            <li>
-                              <a href="#">
+                              <a href="<?=PROOT?>energia/op">
                                  <i class="fa fa-angle-right" aria-hidden="true"></i>
                                  Oficinas pequeñas
                               </a>
@@ -838,7 +719,7 @@ use App\Controllers\RolesController;
                </li>
                <!--AGUA-->
                <li class="border-bottom" style="<?php echo ${'Agua'}; ?>">
-                  <a href="#" onClick="mostrarContenidoEnMedio(`<img class='img img-fluid' src='<?=PROOT?>img/menu/presentacion/agua.png'>`)">
+                  <a href="#" onClick="mostrarContenidoEnMedio(`<p align='center'><img class='img' src='<?=PROOT?>img/menu/presentacion/agua.png'></p>`)">
                   <span class="fa arrow pt-1"></span>
                      <img src="<?=PROOT?>img/menu/agua.png" alt="" width="30px" height="30px"> 
                      <span class="nav-label text-primary">Agua</span>
@@ -889,31 +770,31 @@ use App\Controllers\RolesController;
                         </a>
                         <ul class="nav nav-third-level">
                            <li>
-                              <a href="#">
+                              <a href="<?=PROOT?>agua/vis">
                                  <i class="fa fa-angle-right" aria-hidden="true"></i>
                                  VIS
                               </a>
                            </li>
                            <li>
-                              <a href="#">
+                              <a href="<?=PROOT?>agua/tyc">
                                  <i class="fa fa-angle-right" aria-hidden="true"></i>
                                  E3Y4
                               </a>
                            </li>
                            <li>
-                              <a href="#">
+                              <a href="<?=PROOT?>agua/cys">
                                  <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                 E3Y6
+                                 E5Y6
                               </a>
                            </li>
                            <li>
-                              <a href="#">
+                              <a href="<?=PROOT?>agua/op">
                                  <i class="fa fa-angle-right" aria-hidden="true"></i>
                                  Oficinas pequeñas
                               </a>
                            </li>
                            <li>
-                              <a href="#">
+                              <a href="<?=PROOT?>agua/og">
                                  <i class="fa fa-angle-right" aria-hidden="true"></i>
                                  Oficinas grandes
                               </a>
@@ -944,14 +825,14 @@ use App\Controllers\RolesController;
                </li>
                <!--MATERIALES-->
                <li class="border-bottom" style="<?php echo ${'Materiales'}; ?>">
-                  <a href="#" onClick="mostrarContenidoEnMedio(`<img class='img img-fluid' src='<?=PROOT?>img/menu/presentacion/materiales.png'>`)">
+                  <a href="#" onClick="mostrarContenidoEnMedio(`<p align='center'><img class='img' src='<?=PROOT?>img/menu/presentacion/materiales.png'></p>`)">
                  <img src="<?=PROOT?>img/menu/materiales.png" alt="" width="30px" height="30px">
                       <span class="nav-label text-primary">Materiales</span>
                   </a>
                </li>
                <!--PROVEEDORES-->
                <li class="border-bottom" style="<?php echo ${'Proveedores'}; ?>">
-                  <a href="#" onClick="mostrarContenidoEnMedio(`<img class='img img-fluid' src='<?=PROOT?>img/menu/presentacion/proveedores.png'>`)">
+                  <a href="#" onClick="mostrarContenidoEnMedio(`<p align='center'><img class='img' src='<?=PROOT?>img/menu/presentacion/proveedores.png'></p>`)">
                      <span class="fa arrow pt-1"></span>
                      <img src="<?=PROOT?>img/menu/proveedores.png" alt="" width="30px" height="30px"> 
                      <span class="nav-label text-primary">Proveedores</span>
@@ -979,7 +860,7 @@ use App\Controllers\RolesController;
                </li>
                <!--OFERTA Y DEMANDA-->
                <li class="border-bottom"  style="<?php echo ${'OfertayDemanda'}; ?>">
-                  <a href="#" onClick="mostrarContenidoEnMedio(`<img class='img img-fluid' src='<?=PROOT?>img/menu/presentacion/oferta_demanda.png'>`)">
+                  <a href="#" onClick="mostrarContenidoEnMedio(`<p align='center'><img class='img' src='<?=PROOT?>img/menu/presentacion/oferta_demanda.png'></p>`)">
                      <span class="fa arrow pt-1"></span>
                      <img src="<?=PROOT?>img/menu/oferta.png" alt="" width="30px" height="30px"> 
                      <span class="nav-label text-primary">Oferta y demanda</span>
@@ -1026,7 +907,7 @@ use App\Controllers\RolesController;
                </li>
                <!--OFERTA ACADEMICA-->
                <li class="border-bottom"  style="<?php echo ${'OfertaAcademica'}; ?>">
-                  <a href="#" onClick="mostrarContenidoEnMedio(`<img class='img img-fluid' src='<?=PROOT?>img/menu/presentacion/oferta_academica.png'>`)">
+                  <a href="#" onClick="mostrarContenidoEnMedio(`<p align='center'><img class='img' src='<?=PROOT?>img/menu/presentacion/oferta_academica.png'></p>`)">
                      <span class="fa arrow pt-1"></span>
                      <img src="<?=PROOT?>img/menu/academico.png" alt="" width="30px" height="30px"> 
                      <span class="nav-label text-primary">Oferta acádemica</span>
@@ -1054,7 +935,7 @@ use App\Controllers\RolesController;
                </li>
                <!--REPORTES GENERALES-->
                <li class="border-bottom"  style="<?php echo ${'ReportesGenerales'}; ?>">
-                  <a href="#" onClick="mostrarContenidoEnMedio(`<img class='img img-fluid' src='<?=PROOT?>img/menu/presentacion/reportes.png'>`)">
+                  <a href="#" onClick="mostrarContenidoEnMedio(`<p align='center'><img class='img' src='<?=PROOT?>img/menu/presentacion/reportes.png'></p>`)">
                  <img src="<?=PROOT?>img/menu/reportes.png" alt="" width="30px" height="30px"> 
                      <span class="nav-label text-primary">Reportes generales</span></a>
                </li>
@@ -1062,30 +943,40 @@ use App\Controllers\RolesController;
          </div>
       </nav>
       <nav class="navbar navbar-fixed-top" role="navigation" style="margin-bottom: 0;background-color: #293846 !important;">
-         <div class="navbar-header">
+         
+		  <div class="navbar-header">
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" href="#"><i class="fa fa-bars fa-2x"></i></a>
             <a class="minimalize-styl-2 btn btn-primary" href="<?=PROOT?>users/index"><i class="fa fa-home fa-2x"></i></a>
             <div  class="minimalize-styl-2 text-white ml-0 font-weight-bold"><h3>CLUSTER DE CONSTRUCCION DE SANTANDER</h3></div>
          </div>
+		
+		<form class="form-inline my-2 my-lg-0">
+			<input class="form-control mr-sm-2" type="search" placeholder="Eje: articulos" aria-label="Buscar">
+			<a href="#" class="btn btn-primary btn-outline-primary my-2 my-sm-0" onClick="showModalAgregarBuscadorURL();">Buscar</a>
+		</form> 
+		  
          <ul class="nav navbar-top-links navbar-right mr-3">
             <li>
-               <a href="<?=PROOT?>users/logout">
+               <a href="<?=PROOT?>users/logout" onClick="return confirmaSalir('¿Desea salir del sistema?');">
                   <i class="fa fa-sign-out"></i> Salir
                </a>
             </li>
          </ul>
       </nav>
+
       <div id="page-wrapper" class="gray-bg">
          <div class="wrapper wrapper-content animated fadeInDown">
-            <?= Session::displayMsg() ?>
-            <?= $this->content('body'); ?>
-            <div id="contenido"></div>
+			<?= Session::displayMsg() ?>
+			<?= $this->content('body'); ?> 
+            <div id="contenido">
+				
+			</div>
          </div>
          <div class="footer text-white" style="background-color: #293846 !important;">
             <strong>Copyright</strong> CLUSTER DE CONSTRUCCIÓN DE SANTANDER. &copy; <?= date('Y');?>
          </div>
-      </div>
-   </div>
+         </div>
+      </div>	   
    
    <div class="modal inmodal fade font-weight-bold" id="frmModal" tabindex="-1" role="dialog" aria-labelledby="frmModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
@@ -1172,6 +1063,8 @@ use App\Controllers\RolesController;
       jQuery('#frmModal').modal({backdrop: 'static', keyboard: false});
       jQuery('#frmModal').modal('show');
    }
+	   		   
+	   
 }
 
 </script>

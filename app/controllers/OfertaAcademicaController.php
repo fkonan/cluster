@@ -59,9 +59,9 @@ class OfertaAcademicaController extends Controller {
 			$this->view->empresaID = $this->currentUser->id;
 
 			//Cuando hay  ID es modificar
-			if(isset($_GET['idOA']) && !empty($_GET['idOA'])){
+			if(isset($_POST['idOA']) && !empty($_POST['idOA'])){
 
-				$ofertaAcademica = ofertaAcademica::findById((int)$_GET['idOA']);
+				$ofertaAcademica = ofertaAcademica::findById((int)$_POST['idOA']);
 
 			}else{
 			//Cuando NO hay  ID es crear	

@@ -1,7 +1,6 @@
 <?php
 use Core\FH;
 use Core\H;
-
 ?>
 
 <form method="post" action="" id="frmOA" role="form" enctype="multipart/form-data">
@@ -37,7 +36,7 @@ use Core\H;
 		<div class="col-md-12">
 	        <label>Portafolio Adjunto (.pdf):</label>
 	        <div class="custom-file">
-	            <input id="adjuntoOA" name="adjuntoOA" type="file" class="custom-file-input" value="<?=$this->ofertaAcademica->adjunto?>">
+	            <input id="adjuntoOA" name="adjuntoOA" type="file" class="custom-file-input" value="<?=$this->ofertaAcademica->adjunto?>" accept="application/pdf">
 	            <label for="logo"  class="custom-file-label text-truncate">
 	            	<?php 
 						if(empty($this->ofertaAcademica->adjunto)){

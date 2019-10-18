@@ -47,7 +47,11 @@
     "ResiduoTipo":["*"],
     "ResiduoSubTipo":["*"],
     "Ideam":["*"],
-    "Users":["*"]
+    "Users":["*"],
+	"Arquitectura":["*"], 
+	"Energia":["*"], 
+	"Agua":["*"],
+	"Embended":["*"]
   },
   
   "PARAMETROS":{

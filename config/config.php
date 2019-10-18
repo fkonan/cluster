@@ -2,9 +2,9 @@
 
   define('DEBUG', true); // set debug to false for production
 
-  define('DB_NAME', 'cluster_nuevo'); // database name
+  define('DB_NAME', 'cluster_cc'); // database name
   define('DB_USER', 'root'); // database user
-  define('DB_PASSWORD', '1098643625'); // database password
+  define('DB_PASSWORD', ''); // database password
   define('DB_HOST', 'localhost'); // database host *** use IP address to avoid DNS lookup
 /*
   define('DB_NAME', 'fohm2019_cluster_nuevo'); // database name
