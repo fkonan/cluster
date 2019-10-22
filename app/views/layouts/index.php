@@ -24,7 +24,7 @@ use App\Controllers\RolesController;
    <link href="<?=PROOT?>css/animate.css" rel="stylesheet">
    <link href="<?=PROOT?>css/style.css" rel="stylesheet">
    <link href="<?=PROOT?>css/custom.css" rel="stylesheet">
-   <?= $this->content('head'); ?>
+   <?= $this->content('head');  ?>
 	<script>
 	
 	
