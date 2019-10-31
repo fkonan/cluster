@@ -51,7 +51,8 @@
 	"Arquitectura":["*"], 
 	"Energia":["*"], 
 	"Agua":["*"],
-	"Embended":["*"]
+	"Embended":["*"],
+	"Busqueda":["*"]
   },
   
   "PARAMETROS":{

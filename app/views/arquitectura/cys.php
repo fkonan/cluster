@@ -7,9 +7,10 @@
 		width: 100%;
 		height: 500px;
 	}
-
-	.carousel-control-prev, .carousel-control-next {
-		color: red !important;
+	
+	.carousel-control-next,
+	.carousel-control-prev, .carousel-indicators {
+		filter: invert(100%) !important;
 	}
 </style>
 <!-- Resources https://www.amcharts.com/demos/ -->

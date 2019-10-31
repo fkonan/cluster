@@ -50,10 +50,12 @@ use Core\H;
 			$("#rd_ninguno").prop('checked', false);
 			$("#rd_todos").prop('checked', true);
 			cambiarEstadoChecks('todos');
+			activarDesactivarPermisosTodos(action='activar');
 		}else{
 			$("#rd_todos").prop('checked', false);
 			$("#rd_ninguno").prop('checked', true);
 			cambiarEstadoChecks('ninguno');
+			activarDesactivarPermisosTodos(action='desactivar');
 		}
 		
 	}
@@ -101,6 +103,37 @@ use Core\H;
 		
 	}
 	
+
+	function activarDesactivarPermisosTodos(action='activar'){
+		
+		rolId = $("#cmb_rol").val();
+		modId = 'todos'; //checked  name id value
+		//alert('rolId: '+rolId+' - modId: '+modId);
+		
+		if(action=='activar') {  
+            //alert("Activando");
+			url = '<?=PROOT?>permisos/guardarPermiso/';
+        } else {  
+            //alert("Desactivando");
+			url = '<?=PROOT?>permisos/eliminarPermiso/';
+        }  
+		
+		jQuery.ajax({
+			url : url,
+			data:{
+					rolId:rolId, 
+					modId:modId,
+			},
+         	method : "POST",
+			success : function(resp){
+				console.log(resp);
+				//$("#div_PermisosRol").html(resp);
+			}
+		});
+		
+	}	
+	
+	
 	function mostrarPermisosRol(id){
 				
 		if($("#cmb_rol").val()!= ''){
@@ -119,6 +152,8 @@ use Core\H;
 			$("#div_PermisosRol").html('<tr><td colspan="2" class="text-center">Debe seleccionar un Rol.</td></tr>');
 		}
 	}
+	
+	
 	function actualizarPermisos(){
 		
 		rolId = $("#cmb_rol").val();

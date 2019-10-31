@@ -32,7 +32,7 @@ class PermisosController extends Controller {
 		}
 		//Quejesta mierda? es el vardump () die();
 		//H::dnd($arr_roles);
-			return $arr_roles;
+		return $arr_roles;
 	
 	}
 	
@@ -72,23 +72,34 @@ class PermisosController extends Controller {
 			
 			
 		}
+		
+		//echo '<tr><td>Listado de todos los modulos: '.count($obj_modulos).'</td>';
+		//echo '<td>Listado de modulos activos por rol: '.count($obj_ModulosPorRol).'</td></tr>';
+		if(count($obj_ModulosPorRol)>0){
+			$estadoCheckTodos = 'checked';
+			$estadoCheckNinguno = ' ';
+		}else{
+			$estadoCheckTodos = ' ';
+			$estadoCheckNinguno = 'checked';
+		}
+		
 		$html.="<tr>
 					<td align='center'>
 						
 						
 						<div class=\"form-check-inline\">
 							<a href=\"#\" onClick=\"functionCheck('todos');\" style=\"text-decoration: none; color: black;\">
-								<input type=\"radio\" class=\"form-check-input\" id=\"rd_todos\" name=\"optradio\" value=\"todos\" checked><strong>Todos</strong>
+								<input type=\"radio\" class=\"form-check-input\" id=\"rd_todos\" name=\"optradio\" value=\"todos\" ".$estadoCheckTodos."><strong>Todos</strong>
 							</a>
 						</div>
 						<div class=\"form-check-inline\">
 							<a href=\"#\" onClick=\"functionCheck('ninguno');\" style=\"text-decoration: none; color: black;\">
-								<input type=\"radio\" class=\"form-check-input\" id=\"rd_ninguno\" name=\"optradio\" value=\"ninguno\"><strong>Ninguno</strong>
+								<input type=\"radio\" class=\"form-check-input\" id=\"rd_ninguno\" name=\"optradio\" value=\"ninguno\" ".$estadoCheckNinguno."><strong>Ninguno</strong>
 							</a>
 						</div>
 						
 					</td>
-					<td align='right'><a href='#' class='btn btn-success' onclick='location.reload();'>Actualizar Sitio</a></td>
+					<td align='right'><a href='#' class='btn btn-success' onclick='location.reload();'>Actualizar Permisos</a></td>
 				</tr>";
 		echo $html;
 		$html = "";
@@ -104,19 +115,70 @@ class PermisosController extends Controller {
 	public function guardarPermisoAction($rolId="", $modId=""){
 		
 		//var_dump($_POST);
+		$contador = 0;
+		
 		if($rolId=="" || $modId==""){
 			$rolId = $_POST["rolId"];
 			$modId = $_POST["modId"];
 		}
 		
-		$datos = new Permisos();
-		// Pasa los datos del frm al modelo
-		$datos->assign(['rol_id'=>$rolId, 'modulo_id'=>$modId],Permisos::blackList);
-		if($datos->save())
-			$resp = ['success'=>true,'errors'=>$datos->getErrorMessages()];
-		else
-			$resp = ['success'=>false,'errors'=>$datos->getErrorMessages()];
+		
 
+		if($modId=='todos'){
+
+			$modulos = Modulos::find(['order'=>'id']);			
+			//var_dump($modulos);
+			
+			foreach($modulos as $modulo){
+				//echo 'IdMod: '.$modulo->id.' Modulo: '.$modulo->modulo;
+			 	//$arr_modulos[$modulos->id]=$modulos->modulo;
+				$permisosExistentes = Permisos::find([
+					"conditions"=>"rol_id = '?' and  modulo_id = '?' ",
+					"bind"=>[$rolId, $modulo->id]
+				]);
+				
+				//var_dump($permisosExistentes);
+				
+				if(count($permisosExistentes)==0){
+					
+					$datos = new Permisos();
+					$datos->assign(['rol_id'=>$rolId, 'modulo_id'=>$modulo->id],Permisos::blackList);
+
+					if($datos->save()){
+						$contador+=1;
+						//echo 'IdMod: '.$modulo->id.' Modulo: '.$modulo->modulo;
+					}else{
+						$resp = ['success'=>false,'errors'=>$datos->getErrorMessages()];
+					}
+					unset($datos);
+					
+				}
+
+				
+
+			}
+			
+			//var_dump($datos);
+			if($contador>=count($modulos)){
+				$resp = ['success'=>true,'errors'=>'True'];
+			}else{
+				$resp = ['success'=>false,'errors'=>'Error al guardar todos.'];
+			}
+			
+			//echo "Contador: ".$contador;
+			$contador = 0;
+			
+		}else{
+			$datos = new Permisos();
+			$datos->assign(['rol_id'=>$rolId, 'modulo_id'=>$modId],Permisos::blackList);
+			if($datos->save()){
+				$resp = ['success'=>true,'errors'=>$datos->getErrorMessages()];
+			}else{
+				$resp = ['success'=>false,'errors'=>$datos->getErrorMessages()];
+			}		
+			
+		}
+				
 		unset($datos);
 		return $resp;
 		
@@ -130,52 +192,62 @@ class PermisosController extends Controller {
 			$rolId = $_POST["rolId"];
 			$modId = $_POST["modId"];
 		}
-
-		$respPermiso = $this->validaPermiso($rolId, $modId);
-		foreach($respPermiso['conteo'] as $objPermiso){
+		
+		if($modId=='todos'){
 			
-			if($objPermiso->rta>0){
-				
-				//echo 'se puede eliminar. '.$objPermiso->permisoID;
-				$id=$objPermiso->permisoID;
+			$permisos = Permisos::find([
+				"conditions"=>"rol_id = ? ",
+				"bind"=>[$rolId]
+			]);
+
+
+			foreach($permisos as $permiso){
+
+				$id = $permiso->id;
 				$datos = Permisos::findById((int)$id);
 				if($datos){
 					$datos->delete();
-					$resp = ['success'=>true];
-					return $this->jsonResponse($resp);
+					//echo $id.' - ';
 				}
-				
-			}
+
+			}			
+			
+			unset($datos);
+			unset($permisos);
+			
+		}else{
+
+			$respPermiso = $this->validaPermiso($rolId, $modId);
+			foreach($respPermiso['conteo'] as $objPermiso){
+
+				if($objPermiso->rta>0){
+
+					//echo 'se puede eliminar. '.$objPermiso->permisoID;
+					$id=$objPermiso->permisoID;
+					$datos = Permisos::findById((int)$id);
+					if($datos){
+						$datos->delete();
+						$resp = ['success'=>true];
+						return $this->jsonResponse($resp);
+					}
+
+				}
+
+			}	
+			
+			unset($datos);
+			unset($respPermiso);
+			unset($objPermiso);
 			
 		}
 		
+		
 
 	}
+
 	
-	public function guardarPermisosAction($rolId){
-		//echo $rolId;
-		//var_dump($_POST);
-		//echo "</br></br>";
-		$nroPermisosSinGuardar = 0;
-		
-		foreach($_POST as $nomControl => $idModulo){
-		   //$asignacion = "\$" . $nombre_campo . "='" . $valor . "';";
-			
-			$obj_EstadoPermiso = Permisos::buscarPermiso($rolId, $idModulo);
-			$respPermiso = ['rta'=>$obj_EstadoPermiso];
-			//var_dump($respPermiso);
-			foreach($respPermiso['rta'] as $objPermiso){
-				//echo "</br>ControlID: ".$nomControl." - Valor: ".$idModulo." - Estado: ".$objPermiso->rta."</br></br></br>";
-				if($objPermiso->rta==0){
-					$nroPermisosSinGuardar+=1;
-					
-					var_dump($this->guardarPermiso($rolId, $idModulo));
-				}
-				
-				
-			}
-			
-		}
-
-	}
+	
+	
+	
+	
 }
