@@ -17,6 +17,8 @@
 
   define('PROOT', '/cluster/'); // set this to '/' for a live server.
   define('VERSION','0.1'); // release version this can be used to display version or version assets like css and js files useful for fighting cached browser files
+  $root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'].PROOT;
+  define('PROOTPRE', $root);
 
   define('SITE_TITLE', 'EC2S'); // This will be used if no site title is set
   define('MENU_BRAND', 'EC2S'); //This is the Brand text in the menu

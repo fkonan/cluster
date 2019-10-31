@@ -1,6 +1,253 @@
 <?php $this->setSiteTitle('Energia - Linea Base - Oficinas Grandes')?>
 
 <?php $this->start('body'); //var_dump($_GET); var_dump($_POST); ?>
+
+
+<style>
+	.chartdiv {
+		width: 100%;
+		height: 500px;
+	}
+
+	.carousel-control-prev, .carousel-control-next {
+		color: red !important;
+	}
+</style>
+<!-- Resources https://www.amcharts.com/demos/ -->
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<!-- Chart code -->
+<script>
+
+function addRemoveAnimationCorousel(op=0){
+	
+		if(op=='1'){
+			//alert('Argegando interval');
+			document.getElementById('carouselExampleIndicators').removeAttribute('data-interval');
+			document.getElementById('carouselExampleIndicators').setAttribute('data-interval', '1000000');
+			//$('.carousel').carousel('pause');
+		}else{
+			//alert('Eliminando interval');
+			document.getElementById('carouselExampleIndicators').setAttribute('data-interval', '1000');
+			//$('.carousel').carousel('cycle');
+		}
+	
+}
+
+	
+am4core.ready(function() {
+
+// Themes begin
+//am4core.useTheme(am4themes_frozen);
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+//###########################################################################	
+//############################ OCUPACION DE VIVIENDA L-V ####################
+//###########################################################################
+// Create chart instance
+var chartOV = am4core.create("OcupacionViviendaLV", am4charts.XYChart);
+// Add data
+chartOV.data = [{
+  "hora": "1",
+  "porcentaje": 0
+}, {
+  "hora": "2",
+  "porcentaje": 0
+}, {
+  "hora": "3",
+  "porcentaje": 0
+}, {
+  "hora": "4",
+  "porcentaje": 0
+}, {
+  "hora": "5",
+  "porcentaje": 0
+}, {
+  "hora": "6",
+  "porcentaje": 0
+}, {
+  "hora": "7",
+  "porcentaje": 100
+}, {
+  "hora": "8",
+  "porcentaje": 100
+}, {
+  "hora": "9",
+  "porcentaje": 100
+}, {
+  "hora": "10",
+  "porcentaje": 100
+}, {
+  "hora": "11",
+  "porcentaje": 100
+}, {
+  "hora": "12",
+  "porcentaje": 100
+}, {
+  "hora": "13",
+  "porcentaje": 100
+}, {
+  "hora": "14",
+  "porcentaje": 100
+}, {
+  "hora": "15",
+  "porcentaje": 100
+}, {
+  "hora": "16",
+  "porcentaje": 100
+}, {
+  "hora": "17",
+  "porcentaje": 100
+}, {
+  "hora": "18",
+  "porcentaje": 0
+}, {
+  "hora": "19",
+  "porcentaje": 0
+}, {
+  "hora": "20",
+  "porcentaje": 0
+}, {
+  "hora": "21",
+  "porcentaje": 0
+}, {
+  "hora": "22",
+  "porcentaje": 0
+}, {
+  "hora": "23",
+  "porcentaje": 0
+}];
+
+// Create axes
+var categoryAxis = chartOV.xAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "hora";
+categoryAxis.renderer.grid.template.location = 1;
+categoryAxis.renderer.minGridDistance = 23;
+var valueAxis = chartOV.yAxes.push(new am4charts.ValueAxis());
+//axisBreak.defaultState.transitionDuration = 1000;
+	
+// Create series
+var series = chartOV.series.push(new am4charts.ColumnSeries());
+series.dataFields.valueY = "porcentaje";
+series.dataFields.categoryX = "hora";
+series.name = "porcentaje";
+series.columns.template.tooltipText = "{categoryX}: [bold]{valueY}[/]";
+series.columns.template.fillOpacity = .8;
+
+var columnTemplate = series.columns.template;
+columnTemplate.strokeWidth = 2;
+columnTemplate.strokeOpacity = 1;
+//###########################################################################
+//###########################################################################	
+
+	
+//###########################################################################	
+//############################ APERTURA DE VIVIENDA L-V ####################
+//###########################################################################	
+// Create chart instance
+var chartOV = am4core.create("AperturaViviendaLV", am4charts.XYChart);
+// Add data
+chartOV.data = [{
+  "hora": "1",
+  "porcentaje": 0
+}, {
+  "hora": "2",
+  "porcentaje": 0
+}, {
+  "hora": "3",
+  "porcentaje": 0
+}, {
+  "hora": "4",
+  "porcentaje": 0
+}, {
+  "hora": "5",
+  "porcentaje": 0
+}, {
+  "hora": "6",
+  "porcentaje": 0
+}, {
+  "hora": "7",
+  "porcentaje": 0
+}, {
+  "hora": "8",
+  "porcentaje": 100
+}, {
+  "hora": "9",
+  "porcentaje": 100
+}, {
+  "hora": "10",
+  "porcentaje": 100
+}, {
+  "hora": "11",
+  "porcentaje": 100
+}, {
+  "hora": "12",
+  "porcentaje": 100
+}, {
+  "hora": "13",
+  "porcentaje": 100
+}, {
+  "hora": "14",
+  "porcentaje": 100
+}, {
+  "hora": "15",
+  "porcentaje": 100
+}, {
+  "hora": "16",
+  "porcentaje": 0
+}, {
+  "hora": "17",
+  "porcentaje": 0
+}, {
+  "hora": "18",
+  "porcentaje": 0
+}, {
+  "hora": "19",
+  "porcentaje": 0
+}, {
+  "hora": "20",
+  "porcentaje": 0
+}, {
+  "hora": "21",
+  "porcentaje": 0
+}, {
+  "hora": "22",
+  "porcentaje": 0
+}, {
+  "hora": "23",
+  "porcentaje": 0
+}];
+	
+// Create axes
+var categoryAxis = chartOV.xAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "hora";
+categoryAxis.renderer.grid.template.location = 1;
+categoryAxis.renderer.minGridDistance = 23;
+var valueAxis = chartOV.yAxes.push(new am4charts.ValueAxis());
+//axisBreak.defaultState.transitionDuration = 1000;
+	
+// Create series
+var series = chartOV.series.push(new am4charts.ColumnSeries());
+series.dataFields.valueY = "porcentaje";
+series.dataFields.categoryX = "hora";
+series.name = "porcentaje";
+series.columns.template.tooltipText = "{categoryX}: [bold]{valueY}[/]";
+series.columns.template.fillOpacity = .8;
+
+var columnTemplate = series.columns.template;
+columnTemplate.strokeWidth = 2;
+columnTemplate.strokeOpacity = 1;	
+//###########################################################################
+//###########################################################################
+	
+
+
+}); // end am4core.ready()
+</script>
+
+
 <div class="card border-info">
 
    <div class="card-body pt-2">
@@ -32,7 +279,30 @@
       <img class="d-block w-100" src="<?=PROOT?>img/modulos/energia/eneOGHVAC.png" alt="Energia Oficinas Grandes Mod. 3">
     </div>
 	<div class="carousel-item">
-      <img class="d-block w-100" src="<?=PROOT?>img/modulos/energia/usoHVACOG.png" alt="Energia Oficinas Grandes Mod. 4">
+      <!-- <img class="d-block w-100" src="<?=PROOT?>img/modulos/energia/usoHVACOG.png" alt="Energia Oficinas Grandes Mod. 4"> -->
+		
+		<ul class="nav nav-tabs" id="myTab" role="tablist" style="margin: 2% 10% !important; padding: 2% 10% !important;">
+			<li class="nav-item">
+			<a class="nav-link active" id="tab-1" data-toggle="tab" href="#1" role="tab" aria-controls="1"
+			  aria-selected="true">Uso HVAC - Oficina Grande L-V</a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link" id="tab-2" data-toggle="tab" href="#2" role="tab" aria-controls="2"
+			  aria-selected="false">Uso HVAC - Oficina Grande S-D</a>
+			</li>
+		</ul>
+		<div class="tab-content" id="myTabContent">
+			<div class="tab-pane fade show active" id="1" role="tabpanel" aria-labelledby="tab-1">
+				<h1 align="center">Uso HVAC - Oficina Grande L-V</h1>
+				<div id="OcupacionViviendaLV" class="chartdiv"></div>
+			</div>
+			<div class="tab-pane fade" id="2" role="tabpanel" aria-labelledby="tab-2">
+				<h1 align="center">Uso HVAC - Oficina Grande S-D</h1>
+				<div id="AperturaViviendaLV" class="chartdiv"></div>
+			</div>
+		</div>			
+		
+		
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

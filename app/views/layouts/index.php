@@ -24,22 +24,25 @@ use App\Controllers\RolesController;
    <link href="<?=PROOT?>css/animate.css" rel="stylesheet">
    <link href="<?=PROOT?>css/style.css" rel="stylesheet">
    <link href="<?=PROOT?>css/custom.css" rel="stylesheet">
-   <?= $this->content('head'); ?>
+   <?= $this->content('head');  ?>
 	<script>
 	
 	
-	function showModalAgregarBuscadorURL(idOA=1){
+	function showModalAgregarBuscadorURL(){
 	// Envia al controlador roles
+		keys = $('#txt_busqueda_global').val();
+		//alert(keys);
+		
 		jQuery.ajax({
-		url : '<?=PROOT?>ofertaAcademica/nuevo',
+		url : '<?=PROOT?>busqueda/nuevaBusqueda',
 		method : "POST",
 		data: {
-		idOA:idOA 
+		keys:keys 
 		},
-		success : function(resp){
-				//console.log(resp);
+		success : function(resultadoBusquedas){
+				console.log(resultadoBusquedas);
 				jQuery('#modalTitulo').html('Busqueda en diccionario de navegación.');
-				jQuery('#bodyModal').html('<h3 align="center"> Listando resultados...</h3>');
+				jQuery('#bodyModal').html(resultadoBusquedas);
 				jQuery('#frmModal').modal({backdrop: 'static', keyboard: false});
 				jQuery('#frmModal').modal('show');
 			}
@@ -198,6 +201,14 @@ use App\Controllers\RolesController;
                            </li>
                         </ul>
                      </li>
+					 
+					<li>
+						<a href="<?=PROOT?>busqueda">
+							<i class="fa fa-angle-right" aria-hidden="true"></i>
+							Busquedas
+						</a>
+					</li> 
+					 
                   </ul>
                </li>
                <!--PARAMETROS-->
@@ -951,7 +962,7 @@ use App\Controllers\RolesController;
          </div>
 		
 		<form class="form-inline my-2 my-lg-0">
-			<input class="form-control mr-sm-2" type="search" placeholder="Eje: articulos" aria-label="Buscar">
+			<input id="txt_busqueda_global" name="txt_busqueda_global" class="form-control mr-sm-2" type="search" placeholder="Eje: articulos" aria-label="Buscar" value="">
 			<a href="#" class="btn btn-primary btn-outline-primary my-2 my-sm-0" onClick="showModalAgregarBuscadorURL();">Buscar</a>
 		</form> 
 		  
